@@ -148,6 +148,8 @@ let findTitleCard = name => {
             } else if (resp.records && resp.records.length>0) {
                 let Opportunities = resp.records;
                 resolve(Opportunities);
+            } else if (resp.records && resp.records.length<0) {
+                console.log('No records**');
             }
         });
     });
