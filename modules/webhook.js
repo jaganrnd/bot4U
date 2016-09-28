@@ -88,8 +88,8 @@ let processText = (text, sender)  => {
      getUserInfo(sender).then(response => {  
             sendMessage({text:
                 `Hey ${response.first_name} ....
-            "Bot4U" welcomes you 🙏 🙏
-             Curious to know about me ? 🍴 🍛
+            "Bot4U" welcomes you 
+             Curious to know about me ?
              Please hit - who are you`
             }, sender);
         
