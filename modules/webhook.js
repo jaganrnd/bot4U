@@ -96,7 +96,7 @@ let processText = (text, sender)  => {
             sendMessage({attachment:{
                             "type": "image",
                             "payload": {
-                                "url":"https://lh3.googleusercontent.com/-BW6jSCeY4kGqZXtHTlkw2lwuu5Dl9kEGCk_IhqkE40kcsuTTB7ucKw9DfHpaNYUJw=w300"
+                                "url":"https://scontent.xx.fbcdn.net/v/t1.0-9/14457315_1287265961304406_1862202463416393946_n.png?oh=c7969384a3a59a062fa0d09ab1a8de9f&oe=587A7CD0"
                             }
                         }
             }, sender);
