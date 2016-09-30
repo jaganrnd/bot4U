@@ -148,7 +148,7 @@ let findTitleCard = name => {
                 console.log('ERROR');
                 reject("An error as occurred");
             } else if (resp.records && resp.records.length>0) {
-                Console.log('Record irruku pa**');
+                console.log('Record irruku pa**');
                 let Opportunities = resp.records;
                 resolve(Opportunities);
             } else if (resp.records && resp.records.length<0) {
