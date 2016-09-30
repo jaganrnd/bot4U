@@ -77,6 +77,7 @@ let processText = (text, sender)  => {
     if (match9) {
         console.log('Inside match9');
         salesforce.findTitleCard(match9[1]).then(Opportunities => {    
+            comsole.log('Going to format menu**');
             sendMessage(formatter.formatTitleCard(Opportunities), sender)
         });
         return;
