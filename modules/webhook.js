@@ -46,62 +46,30 @@ let getUserInfo = (userId) => {
     
 };    
 
-/*let getAddress = (lat, lng) => {
-            console.log('Yappa Inside Callout pa', lat);
-            console.log('Yappa Inside Callout pa', lng);
-            console.log('Inside Callout');
-            request({
-                //https://maps.googleapis.com/maps/api/geocode/json?latlng=12.977165,80.138902&key=AIzaSyCOKmcmLPD3KqyfaiMTr3GIcXTPYJVKNa4
-                url:'https://maps.googleapis.com/maps/api/geocode/json',
-                qs: {latlng:{{lat,lng}, key: 'AIzaSyCOKmcmLPD3KqyfaiMTr3GIcXTPYJVKNa4'},
-                //sendMessage({text: ` Latitude "${lat}" `}, sender);
-                method: 'GET',
-            }, (error, response, request) => {
-                if (error) {
-                    console.log('Error sending message: ', error);
-                }else if (response) {
-                    console.log('Responseuu*** ', response.body);
-                }else if (response.body.error) {
-                    console.log('Error: ', response.body.error);
-                }
-            });
-};*/
 
 let processText = (text, sender)  => {
-    let match;
-    match = text.match(/help/i);
-    if (match) {
-        sendMessage({text:
-            `You can ask me things like:
-    Search account Acme
-    Search Acme in accounts
-    Search contact Smith
-    What are my top 3 opportunities?
-    Search opportunity dell
-        `}, sender);
-        return;
-    }
     
    let match8;
     match8 = text.match(/hi/i);
     if (match8) {
-     getUserInfo(sender).then(response => {  
-            sendMessage({text:
-                `Hey ${response.first_name} ....
-            "Bot4U" welcomes you 
-             Curious to know about me ?
-             Please hit - who are you`
-            }, sender);
-        
-            sendMessage({attachment:{
-                            "type": "image",
-                            "payload": {
-                                "url":"https://scontent.xx.fbcdn.net/v/t1.0-9/14457315_1287265961304406_1862202463416393946_n.png?oh=c7969384a3a59a062fa0d09ab1a8de9f&oe=587A7CD0"
+         getUserInfo(sender).then(response => {  
+                sendMessage({text:
+                    `Hey ${response.first_name} ....
+                "Bot4U" welcomes you 
+                 Curious to know about me ?
+                 Please hit - who are you`
+                }, sender);
+
+                sendMessage({attachment:{
+                                "type": "image",
+                                "payload": {
+                                    "url":"https://scontent.xx.fbcdn.net/v/t1.0-9/14457315_1287265961304406_1862202463416393946_n.png?oh=c7969384a3a59a062fa0d09ab1a8de9f&oe=587A7CD0"
+                                }
                             }
-                        }
-            }, sender);
-    });    
-        return;
+                }, sender);
+             
+        });    
+            return;
     }
     
     let match9;
@@ -113,155 +81,7 @@ let processText = (text, sender)  => {
         });
         return;
     }    
-    
-    let match10;
-    match10 = text.match(/location - (.*)/i);    
-    if (match10) {
-        console.log('Inside match10');
-        salesforce.findShops(match10[1]).then(Products => {    
-            sendMessage(formatter.formatShops(Products), sender)
-        });
-        return;
-    }    
-        
-        
-    //HACKATHON
-    
-    
-    let match0;
-    match0 = text.match(/hii/i);
-    if (match0) {
-        
-        getUserInfo(sender).then(response => {
-          sendMessage({text:`Hey ${response.first_name} !!!! 🙏 🙏
-        Welcome to the world of 
-        Rayban 👓 👓 👓 👓
-        Am Rayban bot <(")
-        Need my assistant to 
-        choose model. 👷 ?? 
-        Type yes 👍`}, sender);
-        });
-        
-       /* sendMessage({text:
-        `Hey ${response.first_name} !!!! 🙏 🙏
-             Welcome to the world of 
-             Rayban 👓 👓 👓 👓
-             Am Rayban bot <(")
-             I can help you to choose 
-             model.
-             Need my assistant 👷 ??
-             Type yes 👍
-            `}, sender);*/
-            
-        /*sendMessage({attachment:{
-                        "type": "image",
-                        "payload": {
-                            "url":"http://www.ray-ban.com/_repository/_gui/2010/ray-ban-logo-social.jpg"
-                        }
-                    }
-            }, sender);*/
-      
-        
-        return;
-        
-    }
-    
-    let match1;
-    match1 = text.match(/YESUUUU/i);
-    if (match1) {
-        sendMessage({text:
-        `How Can I Help You :
-        
-            Search sunglasses 🔍🔍
-            
-            Show new Model ⚡ ⚡
-            
-            Share your location to 
-            know near by Stores ↹
-            
-            Gift your loved ones 🎁 💕 
-                `}, sender);
-        return;
-    }
-    
-    match1 = text.match(/Show new (.*)/i);
-    if (match1) {
-        salesforce.getdummyOpportunities(match1[1]).then(Opportunities => {
-            sendMessage({text: `Processing your request "${match1[1]}":`}, sender);
-            //sendMessage(formatter.formatnewModel(Opportunities), sender);
-            sendMessage(formatter.formatQuickReplies(Opportunities), sender);
-        });
-        return;
-    }
-    
-    
-    let match2;
-    match2 = text.match(/Wayfarer/i);
-    if (match2) {
-        salesforce.findWayfarerOpportunities(match2).then(Opportunities => {    
-            sendMessage({text:`Searching Wayfarer Models....`}, sender);
-            sendMessage(formatter.formatWayfarerModels(Opportunities), sender)
-        });
-        return;
-    }
-    
-    
-    let match3;
-    match3 = text.match(/Aviator/i);
-    if (match3) {
-        salesforce.findWayfarerOpportunities(match3).then(Opportunities => {    
-            sendMessage({text:`Searching Aviator Models....`}, sender);
-            sendMessage(formatter.formatWayfarerModels(Opportunities), sender)
-        });
-        return;
-    }
-    
-    //HACKATHON
-    
-    match = text.match(/search account (.*)/i);
-    if (match) {
-        salesforce.findAccount(match[1]).then(accounts => {
-            sendMessage({text: `Here are the accounts I found matching "${match[1]}":`}, sender);
-            sendMessage(formatter.formatAccounts(accounts), sender)
-        });
-        return;
-    }
 
-    match = text.match(/search (.*) in accounts/i);
-    if (match) {
-        salesforce.findAccount(match[1]).then(accounts => {
-            sendMessage({text: `Here are the accounts I found matching "${match[1]}":`}, sender);
-            sendMessage(formatter.formatAccounts(accounts), sender)
-        });
-        return;
-    }
-
-    match = text.match(/search contact (.*)/i);
-    if (match) {
-        salesforce.findContact(match[1]).then(contacts => {
-            sendMessage({text: `Here are the contacts I found matching "${match[1]}":`}, sender);
-            sendMessage(formatter.formatContacts(contacts), sender)
-        });
-        return;
-    }
-
-    match = text.match(/top (.*) opportunities/i);
-    if (match) {
-        salesforce.findOpportunities(match[1]).then(opportunities => {
-            sendMessage({text: `Here are your top ${match[1]} opportunities:`}, sender);
-            sendMessage(formatter.formatOpportunities(opportunities), sender)
-        });
-        return;
-    }
-    
-    match = text.match(/search opportunity (.*)/i);
-    if (match) {
-        salesforce.findOpportunities(match[1]).then(Opportunities => {
-            sendMessage({text: `Here are the Opportunities "${match[1]}":`}, sender);
-            sendMessage(formatter.formatOpp(Opportunities), sender)
-        });
-        return;
-    }
 };
 
 let handleGet = (req, res) => {
@@ -289,7 +109,6 @@ let handlePost = (req, res) => {
                     sendMessage({text: `Thanks For Sharing Your Location`}, sender);
                     sendMessage({text: ` Latitude "${lat}" `}, sender);
                     sendMessage({text: ` Longitude "${lng}" `}, sender);
-                    //getAddress(lat,lng);
                 }
         } 
         else if (event.postback) {
@@ -347,12 +166,6 @@ let handlePost = (req, res) => {
                         console.log('MENU ID**' + payload[1]);
                         console.log('MENU Name**' + payload[2]);
                         console.log('Shop Id**' + payload[3]);
-                        /*salesforce.findProductId(payload[1]).then(ShopId => {
-                                       console.log('Choosen ShopId**' + ShopId);
-                                       salesforce.createInvoice(ShopId).then(() => {
-                                           sendMessage({text: `Hey ${response.first_name} Noted !! Do you wish to order other items?`}, sender);
-                                       });   
-                        });*/ 
                         salesforce.createInvoice(payload[3],response.first_name,payload[2]).then(() => {
                            sendMessage({text: `Hey ${response.first_name} noted !!`}, sender);
                                    sendMessage({attachment:{
@@ -392,7 +205,6 @@ let handlePost = (req, res) => {
                     sendMessage({attachment:{
                             "type": "image",
                             "payload": {
-                                //https://mir-s3-cdn-cf.behance.net/project_modules/disp/10772526268695.563539bc1a55a.gif
                                 "url":"http://www.savegenie.mu/img/web-images/delivery-van-ani.gif"
                                 
                             }
