@@ -143,6 +143,7 @@ let findTitleCard = name => {
         console.log(q);
         console.log('after query');
         org.query({query: q}, (err, resp) => {
+            console.log('ERROR 1st');
             if (err) {
                 console.log('ERROR');
                 reject("An error as occurred");
